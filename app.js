@@ -10,6 +10,10 @@ const { generatedErrors } = require("./middlewares/errors");
 // db connection
 require("./models/db").connectDatabase();
 
+// body parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // logger
 app.use(logger("tiny"));
 

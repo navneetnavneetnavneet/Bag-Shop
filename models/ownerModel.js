@@ -24,9 +24,6 @@ const ownerSchema = new mongoose.Schema(
     picture: {
       type: String,
     },
-    isAdmin: {
-      type: Boolean,
-    },
     prducts: [],
     gstin: {
       type: String,
