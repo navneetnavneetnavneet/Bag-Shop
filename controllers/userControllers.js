@@ -1,10 +1,16 @@
 const { catchAsyncErrors } = require("../middlewares/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
 const User = require("../models/userModel");
+const { sendToken } = require("../utils/SendToken");
+
+module.exports.currentUser = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.id);
+  res.status(200).json(user);
+});
 
 module.exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   const user = await new User(req.body).save();
-  res.status(201).json(user);
+  sendToken(user, 201, res);
 });
 
 module.exports.loginUser = catchAsyncErrors(async (req, res, next) => {
@@ -20,9 +26,14 @@ module.exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 
   const isMatch = user.comparePassword(password);
 
-  if(!isMatch){
-    return next(new ErrorHandler("Wrong Credentials !", 500))
+  if (!isMatch) {
+    return next(new ErrorHandler("Wrong Credentials !", 500));
   }
 
-  res.status(200).json(user);
+  sendToken(user, 200, res);
+});
+
+module.exports.logoutUser = catchAsyncErrors(async (req, res, next) => {
+  res.clearCookie("token");
+  res.status(200).json({ message: "User Logout Successfully !" });
 });
