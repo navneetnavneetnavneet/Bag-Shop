@@ -22,9 +22,13 @@ const ownerSchema = new mongoose.Schema(
       minLength: [6, "Password should have atleat 6 characters !"],
     },
     picture: {
-      type: String,
+      type: Object,
+      default: {
+        fileId: "",
+        url: "",
+      },
     },
-    prducts: [],
+    products: [{type: mongoose.Schema.Types.ObjectId, ref: "product"}],
     gstin: {
       type: String,
     },

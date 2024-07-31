@@ -25,13 +25,17 @@ const userSchema = new mongoose.Schema(
       minLength: [6, "Password should have atleat 6 characters !"],
     },
     picture: {
-      type: String,
+      type: Object,
+      default: {
+        fileId: "",
+        url: "",
+      },
     },
     contact: {
       type: Number,
     },
-    cart: [],
-    prducts: [],
+    cart: [{type: mongoose.Schema.Types.ObjectId, ref: "product"}],
+    products: [{type: mongoose.Schema.Types.ObjectId, ref: "product"}],
   },
   {
     timestamps: true,

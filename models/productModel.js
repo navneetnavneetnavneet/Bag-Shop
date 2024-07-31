@@ -3,8 +3,11 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema(
   {
     image: {
-      type: String,
-      required: [true, "Product Image is required"],
+      type: Object,
+      default: {
+        fileId: "",
+        url: "",
+      },
     },
     name: {
       type: String,
@@ -20,15 +23,15 @@ const productSchema = new mongoose.Schema(
     },
     bgColor: {
       type: String,
-      required: [true, "BG Color is required"],
+      // required: [true, "BG Color is required"],
     },
     panelColor: {
       type: String,
-      required: [true, "Panel Color is required"],
+      // required: [true, "Panel Color is required"],
     },
     textColor: {
       type: String,
-      required: [true, "Text Color is required"],
+      // required: [true, "Text Color is required"],
     },
   },
   {
