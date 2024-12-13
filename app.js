@@ -9,6 +9,7 @@ const { generatedErrors } = require("./middlewares/errors");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const fileupload = require("express-fileupload");
+const port = process.env.PORT || 3000;
 
 // db connection
 require("./models/db").connectDatabase();
@@ -45,6 +46,6 @@ app.all("*", (req, res, next) => {
 app.use(generatedErrors);
 
 // creating server
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
